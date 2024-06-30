@@ -1,0 +1,11 @@
+friday_assistant/
+├── README.md
+├── requirements.txt
+├── main.py
+├── gui.py
+├── voice_recognition.py
+├── commands.py
+└── games/
+    ├── __init__.py
+    ├── tic_tac_toe.py
+    └── rock_paper_scissors.py

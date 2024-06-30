@@ -1,0 +1,9 @@
+speechrecognition
+pyaudio
+tkinter
+requests
+beautifulsoup4
+selenium
+pygame
+spotipy
+pyttsx3
