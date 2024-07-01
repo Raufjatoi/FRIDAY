@@ -32,7 +32,6 @@ class MainWindow(QMainWindow):
             if self.is_gif:
                 self.movie.stop()
                 self.label.clear()
-                self.label.setPixmap(QPixmap("lis.png"))
                 self.is_gif = False
         elif status == "speaking":
             self.movie = QMovie("speaking.gif")
