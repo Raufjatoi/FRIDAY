@@ -1,9 +1,7 @@
 speechrecognition
-pyaudio
-tkinter
-requests
-beautifulsoup4
-selenium
-pygame
-spotipy
 pyttsx3
+webbrowser
+requests
+PyQt5
+numpy
+opencv-python

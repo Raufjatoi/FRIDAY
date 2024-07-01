@@ -1,46 +1,41 @@
-import os
+# commands.py
+
 import webbrowser
-import pyttsx3
-from games import tic_tac_toe, rock_paper_scissors
+import random
+import os
+import wikipedia
+import requests
 
-engine = pyttsx3.init()
-
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
-
-def execute_command(command):
-    if "play music" in command:
-        play_music()
-    elif "play movie" in command:
-        play_movie()
-    elif "close this window" in command:
-        close_window()
-    elif "what is" in command or "search for" in command:
-        google_search(command)
-    elif "play tic-tac-toe" in command:
-        tic_tac_toe.play()
-    elif "play rock-paper-scissors" in command:
-        rock_paper_scissors.play()
-
-def play_music():
-    speak("Playing music")
-    # This will be a placeholder for Spotify API integration
-    print("Playing music...")
-
-def play_movie():
-    speak("Playing movie")
-    # This will be a placeholder for VLC or Pygame integration
-    print("Playing movie...")
-
-def close_window():
-    speak("Closing the window")
-    # Placeholder for closing the window
-    print("Closing the window...")
-
-def google_search(query):
-    search_query = query.replace("what is", "").replace("search for", "").strip()
-    url = f"https://www.google.com/search?q={search_query}"
+def search_google(query):
+    url = f"https://www.google.com/search?q={query}"
     webbrowser.open(url)
-    speak(f"Searching Google for: {search_query}")
-    print(f"Searching Google for: {search_query}")
+
+def search_wikipedia(query):
+    return wikipedia.summary(query, sentences=2)
+
+def play_music(music_folder):
+    music_files = os.listdir(music_folder)
+    random_music = random.choice(music_files)
+    music_path = os.path.join(music_folder, random_music)
+    try:
+        os.startfile(music_path)
+    except FileNotFoundError:
+        return "Sorry, I couldn't find any music."
+    return "Enjoy the music!"
+
+def play_movie(movie_folder):
+    movie_files = os.listdir(movie_folder)
+    random_movie = random.choice(movie_files)
+    movie_path = os.path.join(movie_folder, random_movie)
+    try:
+        os.startfile(movie_path)
+    except FileNotFoundError:
+        return "Sorry, I couldn't find any movies."
+    return "Enjoy the movie!"
+
+def get_news(api_key):
+    url = f"https://newsapi.org/v2/top-headlines?country=us&apiKey={api_key}"
+    response = requests.get(url).json()
+    articles = response["articles"]
+    news = [article["title"] for article in articles[:5]]
+    return news
